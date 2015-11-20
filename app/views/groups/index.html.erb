@@ -1,7 +1,8 @@
 <div class="planresult">
   <% if @groups %>
       <% count=1%>
-      <table align="center" width="800">
+      <% cache(cache_key_for_group_table) do %>
+        <table align="center" width="800">
         <tr>
           <th>No.</th>
           <th>Group Name</th>
@@ -11,7 +12,8 @@
           <th>Show Detail</th>
         </tr>
         <% @groups.each do |group| %>
-            <tr>
+          <% cache(cache_key_for_group_row(group)) do %>
+          <tr>
               <form method="post">
                 <input type="hidden" name="group_name" value="<%= group[:name] %>"/>
                 <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
@@ -23,11 +25,14 @@
               <td text-align="left"><button onclick="delete_group(this)" class="btn btn-xs btn-primary">Delete</button></td>
               <td text-align="left"><button onclick="show_detail(this)" class="btn btn-xs btn-primary">More</button></td>
               <% count +=1%>
-            </tr>
-        <%end%>
+          </tr>
+          <% end %>
+          <% end %>
       </table>
+      <% end %>
 
-  <% else %>
+
+<% else %>
       <div align="center">
           <p>No Data found</p>
       </div>
