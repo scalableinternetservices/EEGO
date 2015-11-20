@@ -17,12 +17,10 @@ def
       location: location_creater,
       num_people: rand(1..99),
       num_day: rand(1..99),
-      plan: "Hiking" + rand(1..5).to_s + "places",
+      plan: "Hiking " + rand(1..5).to_s + " places",
       user_id: rand(1..99)
   )
 end
-
-
 
 # create adventures
 puts "Create adventures with location a"
