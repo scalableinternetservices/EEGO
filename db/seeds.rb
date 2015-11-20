@@ -6,25 +6,53 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Adventure.create(location: "a", num_people: 2, num_day: 3, plan: "Hiking", user_id: 1);
-Adventure.create(location: "a", num_people: 2, num_day: 3, plan: "Hiking", user_id: 2);
-Adventure.create(location: "a", num_people: 3, num_day: 3, plan: "Hiking", user_id: 3);
-Adventure.create(location: "a", num_people: 4, num_day: 3, plan: "Hiking", user_id: 2);
-Adventure.create(location: "b", num_people: 5, num_day: 3, plan: "Hiking", user_id: 1);
-Adventure.create(location: "b", num_people: 34, num_day: 3, plan: "Hiking", user_id: 2);
-Adventure.create(location: "c", num_people: 1, num_day: 3, plan: "Hiking", user_id: 4);
-Adventure.create(location: "c", num_people: 10, num_day: 3, plan: "Hiking", user_id: 3);
-Adventure.create(location: "a", num_people: 2, num_day: 3, plan: "Hiking", user_id: 4);
-Adventure.create(location: "a", num_people: 4, num_day: 3, plan: "Hiking", user_id: 2);
-Adventure.create(location: "b", num_people: 6, num_day: 3, plan: "Hiking", user_id: 4);
-Adventure.create(location: "c", num_people: 7, num_day: 3, plan: "Hiking", user_id: 3);
-Adventure.create(location: "a", num_people: 8, num_day: 3, plan: "Hiking", user_id: 1);
-Adventure.create(location: "b", num_people: 70, num_day: 3, plan: "Hiking", user_id: 2);
-Adventure.create(location: "c", num_people: 23, num_day: 3, plan: "Hiking", user_id: 1);
-Adventure.create(location: "a", num_people: 12, num_day: 3, plan: "Hiking", user_id: 1);
+puts "start seeding"
 
+number_of_advenetures = 100
+number_of_users = 100
 
-User.create(email: "123@ucla.edu", password: "11111111", password_confirmation: "11111111");
-User.create(email: "234@ucla.edu", password: "22222222", password_confirmation: "22222222");
-User.create(email: "345@ucla.edu", password: "33333333", password_confirmation: "33333333");
-User.create(email: "456@ucla.edu", password: "44444444", password_confirmation: "44444444");
+# create adventures
+puts "Create adventures with location a"
+number_of_advenetures.times do
+  Adventure.create(
+      location: "a",
+      num_people: rand(1..99),
+      num_day: rand(1..99),
+      plan: "Hiking" + rand(1..5).to_s + "places",
+      user_id: rand(1..99)
+  )
+end
+
+puts "Create adventures with location b"
+number_of_advenetures.times do
+  Adventure.create(
+      location: "b",
+      num_people: rand(1..99),
+      num_day: rand(1..99),
+      plan: "Hiking" + rand(1..5).to_s + "places",
+      user_id: rand(1..99)
+  )
+end
+
+puts "Create adventures with location c"
+number_of_advenetures.times do
+  Adventure.create(
+      location: "c",
+      num_people: rand(1..99),
+      num_day: rand(1..99),
+      plan: "Hiking" + rand(1..5).to_s + "places",
+      user_id: rand(1..99)
+  )
+end
+
+# create users
+puts "Create users"
+number_of_users.times do |n_user|
+  User.create(
+      email: n_user.to_s + "@ucla.edu",
+      password: "11111111",
+      password_confirmation: "11111111",
+  )
+end
+
+puts "end seeding"
