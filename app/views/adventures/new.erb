@@ -1,31 +1,32 @@
 <div class="planform">
     <table align="center">
-      <form id="new_adventure_form" action="/adventures/create" method="post">
+      <%= form_tag("/adventures/create", method: "post", id: "new_adventure_form") do%>
         <tr>
           <td class="description"><h4>Location</h4></td>
           <td>
-            <input type="text" class="form-control" placeholder="1~20 characters" id="location" name="location" maxlength="20"/>
+            <%=text_field_tag :location,nil, placeholder: "1~20 characters", maxlength: 20, class: "form-control" %>
           </td>
           </tr>
           <tr>
             <td class="description"><h4>Number of People</h4></td>
             <td>
-              <input type="text" class="form-control" placeholder="1~99" id="num_people" name="num_people" maxlength="2"/>
+             <%=text_field_tag :num_people,nil, placeholder: "1~99", maxlength: 2, class: "form-control" %>
             </td>
           </tr>
           <tr>
             <td class="description"><h4>Number of Days</h4></td>
             <td>
-              <input type="text" class="form-control" placeholder="1~99" id="num_day" name="num_day" maxlength="2"/>
+            <%=text_field_tag :num_day,nil, placeholder: "1~99", maxlength: 2, class: "form-control" %>
             </td>
           </tr>
           <tr>
             <td class="description"><h4>Plan</h4></td>
             <td>
-              <textarea id="plan" name="plan" class="form-control" placeholder="Please enter your plan (400characters)" rows="10" cols="40"></textarea>
+            <%=text_area_tag :plan,nil, placeholder: "Please enter your plan (400characters)", size: "40x10", class: "form-control" %>
             </td>
           </tr>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+         <% end %>
       </form>
         <tr>
           <td><button onclick="location.href='/adventures/index'" class="btn btn-primary">Cancel</button></td>
