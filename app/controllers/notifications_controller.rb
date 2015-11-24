@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   before_action :require_user
   def index
     @user = User.find(current_user.id)
-    @notifications = @user.notifications if stale? (User.all)
+    @notifications = @user.notifications
   end
 
   def create

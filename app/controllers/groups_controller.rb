@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   before_action :require_user
 
   def index
-    @group_entries = Group.where("user_id=#{current_user.id}") if stale? (Group.all)
+    @group_entries = Group.where("user_id=#{current_user.id}")
     @groups = []
     @group_entries.each do |g|
       @cur_group = {name: g.name, num_people: Group.where("name=\"#{g.name}\"").count};
