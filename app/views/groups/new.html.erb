@@ -1,3 +1,4 @@
+<% cache('group-new') do%>
 <div class="container">
   <%= form_tag '/groups', method: :post, id: "create_group" do %>
     <% if @friends.count > 0 %>
@@ -15,3 +16,4 @@
     <% end %>
   <% end %>
 </div>
+<% end %>

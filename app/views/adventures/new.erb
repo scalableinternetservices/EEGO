@@ -1,3 +1,4 @@
+<% cache('adventure-new') do%>
 <div class="planform">
     <table align="center">
       <%= form_tag("/adventures/create", method: "post", id: "new_adventure_form") do%>
@@ -82,17 +83,5 @@
             warning(num_day);
             isValid = false;
         }
-        else {
-            remove_warning(num_day);
-        }
-        return isValid;
-    }
-
-    function warning(input) {
-        input.addClass('error');
-    }
-
-    function remove_warning(input) {
-        input.removeClass('error');
-    }
-</script>
+    </script>
+<% end %>
