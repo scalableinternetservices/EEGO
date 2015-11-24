@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <%cache('application') do %>
   <head>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
@@ -45,9 +46,9 @@
 
     </style>
   </head>
-
+  <% end %>
   <body>
-
+    <% cache(cache_key_for_navigation_bar(current_user) do)%>
     <div class="nav navbar-default navbar-fixed-top">        
       <div class="container">
         <ul class="pull-left">
@@ -72,7 +73,7 @@
          </ul>
     </div>
   </div>
-
+  <% end %>
 
   <div class="body-padding">
   <%= yield %>
