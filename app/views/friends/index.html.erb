@@ -28,26 +28,30 @@
   <table class="table table-striped">
     <tbody>
     <% if @no_user == 0 %>
+      <% @friends.each do |f| %>
+      <tr>
+        <td><%= f.email %></td>
+        <td>
+          <% if f.friendships[0].status == 2 %>
+            <span class="input-group-btn">
+              <button class="btn btn-xs btn-default pull-right" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
       <% @users.each do |user| %>
       <tr>
         <% if user.id != current_user.id %>
           <div class="row">
             <td><%= user.email %></td>
             <td>
-              <% if !is_friend?(user) %>
-                <% if is_pending_request?(user) %>
-                  <span class="input-group-btn">
-                    <button class="btn btn-xs btn-default pull-right" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
-                  </span>
-                <% else %>
-	          <%= form_tag '/friends', method: :post, id: "request_form" do %>
-	            <%= text_field_tag :friend, user.id, type: :hidden %>
-                  <% end %>
-                  <span class="input-group-btn">
-                    <button onclick="sendRequest()" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>
-                  </span>
-	        <% end %>
+	      <%= form_tag '/friends', method: :post, id: "request_form" do %>
+	        <%= text_field_tag :friend, user.id, type: :hidden %>
               <% end %>
+              <span class="input-group-btn">
+                <button onclick="sendRequest()" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>
+              </span>
             </td>
           </div>
         <% end %>
@@ -57,10 +61,20 @@
       <div class="note">
         <p>No results found.</p>
       </div>
-    <% else %>
+    <% elsif @no_user == 2 %>
       <div class="note">
         <p>You have no friends at the moment. Find your friends now!</p>
       </div>
+    <% else %>
+      <% @users.each do |u| %>
+      <tr>
+        <% if u.id != current_user.id %>
+          <div class="row">
+            <td><%= u.email %></td>
+          </div>
+        <% end %>
+      </tr>
+      <% end %>
     <% end %>
     </tbody>
   </table>

@@ -3,19 +3,24 @@ class FriendsController < ApplicationController
 
   def index
     if params[:search] != nil
-      @users = User.search(params[:search])
+      @friends = User.includes(:friendships).where("email LIKE '%#{params[:search]}%' AND friend_id=#{current_user.id}").references(:friendships)
+      @friend_ids = []
+      @friends.each do |f|
+        @friend_ids.push f.id
+      end
+      @users = User.where("email LIKE '%#{params[:search]}%' AND id NOT IN #{array_to_str(@friend_ids)}")
       @no_user = 0
-      if @users.empty?
+      if @users.empty? and @friends.empty?
         @no_user = 1
       end
     else
-      @friends = current_user.friendships
+      @friends = User.includes(:friendships).where("friend_id=#{current_user.id}").references(:friendships)
       @users = []
-      @friends.each do |friend|
-        @users.push User.find(friend.friend_id) if friend.status == 1
+      @friends.each do |f|
+        @users.push f if f.friendships[0].status == 1
       end
       if !@users.empty?
-        @no_user = 0
+        @no_user = 3
       else
         @no_user = 2
       end
@@ -77,5 +82,17 @@ class FriendsController < ApplicationController
 private
   def friend_params
     params.require(:friend)
+  end
+
+  def array_to_str(a)
+    s = '('
+    a.each do |e|
+      s = s + e.to_s + ','
+    end
+    if s[-1] == '(' 
+      return '()'
+    end
+    s[-1] = ')'
+    return s
   end
 end
