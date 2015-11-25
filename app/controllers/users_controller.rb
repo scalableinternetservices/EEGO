@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name) if stale? (User.all)
+    @users = User.order(:name)
   end
 
   # GET /users/1
