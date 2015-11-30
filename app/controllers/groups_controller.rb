@@ -2,7 +2,10 @@ class GroupsController < ApplicationController
   before_action :require_user
 
   def index
-    @group_entries = Group.where("user_id=#{current_user.id}")
+    group_maximum_updated = Group.maximum("updated_at").try(to_s, :number)
+    @group_entries = Rails.cache.fetch("my_group#{group_maximum_updated}_#{current_user.id}") do
+        Group.where("user_id=#{current_user.id}")
+        end
     @groups = []
     @group_entries.each do |g|
       @cur_group = {name: g.name, num_people: Group.where("name=\"#{g.name}\"").count};

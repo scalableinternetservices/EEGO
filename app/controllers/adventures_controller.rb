@@ -4,7 +4,10 @@ class AdventuresController < ApplicationController
   def index
     redirect_to '/users/sign_in' unless user_signed_in?
     location = params[:location]
-    @adventures = Adventure.where("user_id=#{current_user.id}")
+    adventure_max_updated = Adventure.maximum("updated_at").try(to_s, :number)
+    @adventures = Rails.cache.fetch("my_adventure_#{adventure_max_updated}_#{current_user.id}", expires_in: 2.hours) do
+        Adventure.where("user_id=#{current_user.id}")
+    end
   end
 
   def new
@@ -28,7 +31,10 @@ class AdventuresController < ApplicationController
 
   def search
     location = params[:location]
-    @adventures = Adventure.where("location LIKE ?","%#{location}%")
+    adventure_max_updated = Adventure.maximum("updated_at").try(to_s, :number)
+    @adventures = Rails.cache.fetch("search_for_adventure_#{adventure_max_updated}_#{location}", expires_in: 2.hours) do
+        Adventure.where("location LIKE ?","%#{location}%")
+      end
   end
 
   def delete
