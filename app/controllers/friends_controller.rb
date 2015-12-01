@@ -2,8 +2,8 @@ class FriendsController < ApplicationController
   before_action :require_user
 
   def index
-    user_maximum_updated = User.maximum("updated_at").try(to_s, :number)
     if params[:search] != nil
+      user_maximum_updated = User.maximum("updated_at").try(to_s, :number)
       @users = Rails.cache.fetch("search_user_#{user_maximum_updated}_#{params[:search]}", expires_in: 2.hours) do
           User.search(params[:search])
           end
