@@ -24,11 +24,12 @@
 </div>
 
 <div class="container" id="listing">
-  <table class="table table-striped">
+    <table class="table table-striped">
     <tbody>
     <% if @no_user == 0 %>
       <% @users.each do |user| %>
-      <tr>
+       <% cache(cache_key_for_friend_row(user)) do %>
+    <tr>
         <% if user.id != current_user.id %>
           <div class="row">
             <td><%= user.email %></td>
@@ -39,11 +40,11 @@
                     <button class="btn btn-xs btn-default pull-right" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
                   </span>
                 <% else %>
-	          <%= form_tag '/friends', method: :post, id: "request_form" do %>
+	          <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
 	            <%= text_field_tag :friend, user.id, type: :hidden %>
                   <% end %>
                   <span class="input-group-btn">
-                    <button onclick="sendRequest()" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>
+                    <button onclick="sendRequest(<%= user.id%>)" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>
                   </span>
 	        <% end %>
               <% end %>
@@ -51,6 +52,7 @@
           </div>
         <% end %>
       </tr>
+      <% end %>
       <% end %>
     <% elsif @no_user == 1%>
       <div class="note">
@@ -71,8 +73,8 @@
     form.submit();
   }
 
-  function sendRequest() {
-    var form = $("#request_form");
+  function sendRequest(id) {
+    var form = $("#request_form_" + id);
     form.submit();
   }
 </script>
