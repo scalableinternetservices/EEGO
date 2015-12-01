@@ -39,11 +39,11 @@
                     <button class="btn btn-xs btn-default pull-right" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
                   </span>
                 <% else %>
-	          <%= form_tag '/friends', method: :post, id: "request_form" do %>
+	          <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
 	            <%= text_field_tag :friend, user.id, type: :hidden %>
                   <% end %>
                   <span class="input-group-btn">
-                    <button onclick="sendRequest()" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>
+                    <button onclick="sendRequest(<%= user.id%>)" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>
                   </span>
 	        <% end %>
               <% end %>
@@ -71,8 +71,8 @@
     form.submit();
   }
 
-  function sendRequest() {
-    var form = $("#request_form");
+  function sendRequest(id) {
+    var form = $("#request_form_" + id);
     form.submit();
   }
 </script>
