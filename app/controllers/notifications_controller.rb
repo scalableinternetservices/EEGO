@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   before_action :require_user
   def index
     notification_maximum_updated = Notification.maximum("updated_at").try(to_s, :number)
-    @user = Rails.cache.fetch("my_notifications_#{notification_maximum_updated}_#{current_user.id}") do
+    @user = Rails.cache.fetch("my_notifications_#{notification_maximum_updated}_#{current_user.id}", expires_in: 5.minutes) do
         User.find(current_user.id)
         end
     @notifications = @user.notifications

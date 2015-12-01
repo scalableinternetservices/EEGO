@@ -5,7 +5,7 @@ class AdventuresController < ApplicationController
     redirect_to '/users/sign_in' unless user_signed_in?
     location = params[:location]
     adventure_max_updated = Adventure.maximum("updated_at").try(to_s, :number)
-    @adventures = Rails.cache.fetch("my_adventure_#{adventure_max_updated}_#{current_user.id}", expires_in: 2.hours) do
+    @adventures = Rails.cache.fetch("my_adventure_#{adventure_max_updated}_#{current_user.id}", expires_in: 30.seconds) do
         Adventure.where("user_id=#{current_user.id}")
     end
   end
