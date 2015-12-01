@@ -4,7 +4,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
+    user_maximum_updated = User.maximum("updated_at").try(to_s, : number)
+    @users = Rails.cache.fetch("user_index_#{user_maximum_updated}") do
+      User.order(:name)
+    end
   end
 
   # GET /users/1
