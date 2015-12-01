@@ -29,7 +29,7 @@ class AdventuresController < ApplicationController
   def search
     location = params[:location]
     @adventures = Adventure.where("location LIKE ?","%#{location}%")
-    expires_in 3.minutes, :public => true
+    expires_in 1.minutes, :public => true
   end
 
   def delete
