@@ -83,5 +83,17 @@
             warning(num_day);
             isValid = false;
         }
+        else {
+            remove_warning(num_day);
+        }
+        return isValid;
+    }
+
+    function warning(input) {
+        input.addClass('error');
+    }
+    function remove_warning(input) {
+        input.removeClass('error');
+    }
     </script>
 <% end %>
