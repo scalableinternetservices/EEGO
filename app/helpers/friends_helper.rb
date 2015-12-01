@@ -10,8 +10,8 @@ module FriendsHelper
   def cache_key_for_friend_row(user)
     "friend-#{user.id}-#{user.notifications.maximum(:updated_at)}"
   end
- # def cache_key_for_friend_table
- #  "friend-table-#{Friendship.maximum(:updated_at).try(to_s)}"
- # end
+  def cache_key_for_friend_table
+   "friend-table-#{Friendship.maximum(:updated_at)}"
+  end
 
 end
