@@ -1,4 +1,5 @@
-<div class="planform">
+<% cache('adventure-new') do%>
+    <div class="planform">
     <table align="center">
       <%= form_tag("/adventures/create", method: "post", id: "new_adventure_form") do%>
         <tr>
@@ -96,3 +97,4 @@
     }
 
 </script>
+<%end%>
