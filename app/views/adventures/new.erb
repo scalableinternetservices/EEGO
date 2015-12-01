@@ -1,4 +1,3 @@
-<% cache('adventure-new') do%>
 <div class="planform">
     <table align="center">
       <%= form_tag("/adventures/create", method: "post", id: "new_adventure_form") do%>
@@ -70,7 +69,7 @@
         }
 
         //check num_people
-        if (num_people === undefined || num_people.val()<1 || num_people.val()>99) {
+        if (num_people === undefined || num_people.val() < 1 || num_people.val() > 99) {
             warning(num_people);
             isValid = false;
         }
@@ -79,9 +78,21 @@
         }
 
         //check num_day
-        if (num_day === undefined || num_day.val()<1 || num_day.val()>99) {
+        if (num_day === undefined || num_day.val() < 1 || num_day.val() > 99) {
             warning(num_day);
             isValid = false;
         }
-    </script>
-<% end %>
+        else {
+            remove_warning(num_day);
+        }
+        return isValid;
+    }
+
+    function warning(input) {
+        input.addClass('error');
+    }
+    function remove_warning(input) {
+        input.removeClass('error');
+    }
+
+</script>
