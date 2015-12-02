@@ -28,7 +28,7 @@ class AdventuresController < ApplicationController
 
   def search
     location = params[:location]
-    @adventures = Adventure.fetch(location)
+    @adventures = Adventure.search_by_location(location)
   end
 
   def delete
