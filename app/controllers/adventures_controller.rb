@@ -6,7 +6,7 @@ class AdventuresController < ApplicationController
     location = params[:location]
     adventure_max_updated = Adventure.maximum("updated_at").try(to_s, :number)
     @adventures = Rails.cache.fetch("my_adventure_#{adventure_max_updated}_#{current_user.id}", expires_in: 30.seconds) do
-        Adventure.where("user_id=#{current_user.id}")
+        Adventure.where("user_id=#{current_user.id}").to_a
     end
   end
 
@@ -33,7 +33,7 @@ class AdventuresController < ApplicationController
     location = params[:location]
     adventure_max_updated = Adventure.maximum("updated_at").try(to_s, :number)
     @adventures = Rails.cache.fetch("search_for_adventure_#{adventure_max_updated}_#{location}", expires_in: 2.hours) do
-        Adventure.where("location LIKE ?","%#{location}%")
+        Adventure.where("location LIKE ?","%#{location}%").to_a
       end
   end
 

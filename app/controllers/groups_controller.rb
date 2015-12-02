@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   def index
     group_maximum_updated = Group.maximum("updated_at").try(to_s, :number)
     @group_entries = Rails.cache.fetch("my_group_#{group_maximum_updated}_#{current_user.id}", expirs_in: 30.seconds ) do
-        Group.where("user_id=#{current_user.id}")
+        Group.where("user_id=#{current_user.id}").to_a
         end
     @groups = []
     @group_entries.each do |g|
