@@ -1,7 +1,9 @@
 <div class="container" id="listing">
+  <% cache(cache_key_for_notification_table) do %>
 <table class = "table table-striped" id="notification">
   <tbody>
   <% @notifications.each do |n|%>
+  <% cache(cache_key_for_notification_row(n)) do %>
   <tr><td><%= User.find(n.sender_user_id).email + " wants to invite you as a friend!"%></td>
   <% if n.status == 0 %>
   <td>
@@ -23,9 +25,11 @@
     <td></td>
     <%end%>
     </tr>
+    <%end%>
 <% end %>
   </tbody>
 </table>
+  <%end%>
 </div>
 <script>
     function accept_invitation() {
