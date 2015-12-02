@@ -29,8 +29,8 @@
     <% if @no_user == 0 %>
     <% cache(cache_key_for_friend_table) do%>
       <% @users.each do |user| %>
-       <% cache(cache_key_for_friend_row(user)) do %>
-    <tr>
+      <% cache(cache_key_for_friend_row(user)) do %>
+      <tr>
         <% if user.id != current_user.id %>
           <div class="row">
             <td><%= user.email %></td>
