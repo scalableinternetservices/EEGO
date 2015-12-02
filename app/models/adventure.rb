@@ -2,7 +2,7 @@ class Adventure < ActiveRecord::Base
   belongs_to :user
   def self.search_by_location(location)
     @adventures ||= Rails.cache.fetch("adventure_#{location}", expires_in: 1.minute) do
-      @adventures = Adventure.where("location LIKE ?","%#{location}%")
+      @adventures = Adventure.where("location LIKE ?","%#{location}%").to_a
     end
     @adventures
 
