@@ -28,7 +28,7 @@ class AdventuresController < ApplicationController
 
   def search
     location = params[:location]
-    @adventures = Adventure.where("location LIKE ?","%#{location}%")
+    @adventures = Adventure.fetch(location)
   end
 
   def delete

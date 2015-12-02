@@ -1,7 +1,12 @@
 class Adventure < ActiveRecord::Base
   belongs_to :user
   def self.fetch(location)
-    Rails.cache.fetch("adventure_#{location}") { Adventure.where("location LIKE ?","%#{location}%")}
+    # @adventures ||= Rails.cache.fetch("adventure_#{location}", expires_in: 1.minute) do
+    #   @adventures = Adventure.where("location LIKE ?","%#{location}%")
+    # end
+    # @adventures
+
+    Rails.cache.fetch("adventure_#{location}") {Adventure.where("location LIKE ?","%#{location}%")}
   end
 
   def after_save
