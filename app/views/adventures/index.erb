@@ -1,7 +1,6 @@
 <div class="planresult">
   <% if (!@adventures.empty?) %>
       <% count=1%>
-      <% cache(cache_key_for_adventure_table) do %>
       <table align="center" width="800">
         <tr>
           <th>Plan</th>
@@ -13,7 +12,6 @@
           <th>Show Detail</th>
         </tr>
         <% @adventures.each do |adventure| %>
-            <% cache(cache_key_for_adventure_row(adventure)) do %>
             <tr>
               <form method="post">
                 <input type="hidden" name="location" value="<%= adventure.location%>"/>
