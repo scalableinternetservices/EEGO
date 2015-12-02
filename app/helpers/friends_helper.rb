@@ -11,7 +11,7 @@ module FriendsHelper
     "friend-#{user.id}-#{user.notifications.maximum(:updated_at)}"
   end
   def cache_key_for_friend_table
-   "friend-table-#{Friendship.maximum(:updated_at)}"
+   "friend-table-#{current_user.id}-#{Friendship.maximum(:updated_at)}"
   end
 
 end
