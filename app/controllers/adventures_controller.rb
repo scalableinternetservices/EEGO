@@ -4,7 +4,7 @@ class AdventuresController < ApplicationController
   def index
     redirect_to '/users/sign_in' unless user_signed_in?
     location = params[:location]
-    @adventures = Adventure.where("user_id=#{current_user.id}").paginate(:page => params[:page], :per_page => 30)
+    @adventures = Adventure.where("user_id=#{current_user.id}").paginate(:page => params[:page], :per_page => 10)
   end
 
   def new

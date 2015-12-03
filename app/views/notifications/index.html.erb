@@ -24,6 +24,9 @@
     <%end%>
     </tr>
 <% end %>
+    <div class = "text-center">
+    <%= will_paginate @notifications, renderer: BootstrapPagination::Rails%>
+    </div>
   </tbody>
 </table>
 </div>

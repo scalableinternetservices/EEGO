@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :require_user
   def index
-    @user = User.find(current_user.id)
+    @user = User.find(current_user.id).paginate(:page => params[:page], :per_page => 10)
     @notifications = @user.notifications
   end
 

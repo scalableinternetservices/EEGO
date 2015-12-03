@@ -3,7 +3,7 @@ class FriendsController < ApplicationController
 
   def index
     if params[:search] != nil
-      @users = User.search(params[:search])
+      @users = User.search(params[:search]).paginate(:page => params[:page], :per_page => 10)
       @no_user = 0
       if @users.empty?
         @no_user = 1

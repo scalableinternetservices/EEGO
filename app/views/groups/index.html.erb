@@ -25,6 +25,9 @@
               <% count +=1%>
             </tr>
         <%end%>
+        <div class = "text-center">
+        <%= will_paginate @groups, renderer: BootstrapPagination::Rails%>
+        </div>
       </table>
 
   <% else %>
