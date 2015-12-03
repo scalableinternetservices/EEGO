@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   before_action :require_user
 
   def index
-    @group_entries = Group.where("user_id=#{current_user.id}").paginate(:page => params[:page], :per_page => 10)
+    @group_entries = Group.where("user_id=#{current_user.id}")
     @groups = []
     @group_entries.each do |g|
       @cur_group = {name: g.name, num_people: Group.where("name=\"#{g.name}\"").count};
@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
       # @cur_group.num_people = Group.where("name=#{g.name}").count
       @groups.push(@cur_group)
     end
+    @groups = @groups.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new

@@ -53,9 +53,6 @@
         <% end %>
       </tr>
       <% end %>
-      <div class = "text-center">
-      <%= will_paginate @users, renderer: BootstrapPagination::Rails%>
-      </div>
       <% elsif @no_user == 1%>
       <div class="note">
         <p>No results found.</p>
@@ -67,6 +64,9 @@
     <% end %>
     </tbody>
   </table>
+  <div class = "text-center">
+    <%= will_paginate @users, renderer: BootstrapPagination::Rails%>
+  </div>
 </div>
 
 <script>

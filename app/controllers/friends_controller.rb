@@ -19,6 +19,7 @@ class FriendsController < ApplicationController
       else
         @no_user = 2
       end
+      @users = @users.paginate(:page => params[:page], :per_page => 10)
     end
   end
 
