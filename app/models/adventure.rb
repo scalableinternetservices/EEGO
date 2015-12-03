@@ -5,15 +5,13 @@ class Adventure < ActiveRecord::Base
       @adventures = Adventure.where("location LIKE ?","%#{location}%").to_a
     end
     @adventures
-
-    # Rails.cache.fetch("adventure_#{location}") {Adventure.where("location LIKE ?","%#{location}%")}
   end
 
-  # def after_save
-  #   Rails.cache.write("adventure_#{location}", self)
-  # end
-  #
-  # def after_destroy
-  #   Rails.cache.delete("adventure_#{location}")
-  # end
+  def after_save
+    Rails.cache.write("adventure_#{location}", self)
+  end
+
+  def after_destroy
+    Rails.cache.delete("adventure_#{location}")
+  end
 end
