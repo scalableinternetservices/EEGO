@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="col-lg-6">
+  <div class="row" id="friend_input">
+    <div class="col-lg-9">
 
       <div class="input-group">
       <form id="search_friends" action="/friends" method="get">
@@ -29,13 +29,13 @@
 
 
 
-<div class="container">
+<div class="container" id="friend_list">
   <div class="row">
     <div class="col-lg-12">
     <%if @search_result == 0%>
-      <h2 class="page-header">My Friends</h2>
+      <h2>My Friends</h2>
     <% else %>
-      <h2 class="page-header">Search Results</h2>
+      <h2>Search Results</h2>
     <% end %>
     </div>
     <% if @no_user == 0 %>
