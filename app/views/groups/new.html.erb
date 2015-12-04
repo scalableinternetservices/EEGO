@@ -7,6 +7,7 @@
           <%= text_field_tag :group_name, nil, :required => true %>
         </div>
       </div>
+      <hr>
       <ul class="list-group">
       <% @friends.each do |friend| %>
         <li class="list-group-item">
@@ -14,8 +15,15 @@
         <%= label_tag(friend.id, friend.email) %>
         </li>
       <% end %>
-      </ul>
-      <%= submit_tag("Create Group") %>
+    </ul>
+      <button onclick="createGroup()" class="btn btn-sm btn-primary" type="button">&nbsp;Create Group&nbsp;</button>
     <% end %>
   <% end %>
 </div>
+
+<script>
+function createGroup() {
+    var form = $("#create_group");
+    form.submit();
+}
+</script>
