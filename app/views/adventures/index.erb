@@ -1,80 +1,86 @@
 <div class="planresult">
   <% if (!@adventures.empty?) %>
-      <% count=1%>
+      <% count=1 %>
       <div class="container container-table">
         <div class="row vertical-center-row">
           <div class="col-md-8 col-md-offset-2">
-            <table width="800" class="table table-striped table-hover">
+            <table width="800" class="table table-striped">
               <thead align="center">
 
               <tr>
-          <th>Plan</th>
-          <th>Location</th>
-          <th>People</th>
-          <th>Day</th>
-          <th>Edit</th>
-          <th>Delete</th>
-          <th>Show Detail</th>
-        </tr>
+                <th>Plan</th>
+                <th>Location</th>
+                <th>People</th>
+                <th>Day</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>Show Detail</th>
+              </tr>
               </thead>
               <tbody text-align="left">
-        <% @adventures.each do |adventure| %>
-            <tr>
-              <form method="post">
-                <input type="hidden" name="location" value="<%= adventure.location%>"/>
-                <input type="hidden" name="num_people" value="<%= adventure.num_people%>"/>
-                <input type="hidden" name="num_day" value="<%= adventure.num_day%>" />
-                <input type="hidden" name="plan" value="<%= adventure.plan%>" />
-                <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-              </form>
-              <td><%= count%></td>
-              <td text-align="left"><%= adventure.location%></td>
-              <td text-align="left"><%= adventure.num_people%></td>
-              <td text-align="left"><%= adventure.num_day%></td>
-              <td text-align="left"><button onclick="edit_adventure(this)" class="btn btn-xs btn-primary">Edit</button></td>
-              <td text-align="left"><button onclick="delete_adventure(this)" class="btn btn-xs btn-primary">Delete</button></td>
-              <td text-align="left"><button onclick="show_detail(this)" class="btn btn-xs btn-primary">More</button></td>
-              <% count +=1%>
-            </tr>
-        <%end%>
+              <% @adventures.each do |adventure| %>
+                  <tr>
+                    <form method="post">
+                      <input type="hidden" name="location" value="<%= adventure.location %>"/>
+                      <input type="hidden" name="num_people" value="<%= adventure.num_people %>"/>
+                      <input type="hidden" name="num_day" value="<%= adventure.num_day %>"/>
+                      <input type="hidden" name="plan" value="<%= adventure.plan %>"/>
+                      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+                    </form>
+                    <td><%= count %></td>
+                    <td text-align="left"><%= adventure.location %></td>
+                    <td text-align="left"><%= adventure.num_people %></td>
+                    <td text-align="left"><%= adventure.num_day %></td>
+                    <td text-align="left">
+                      <button onclick="edit_adventure(this)" class="btn btn-xs btn-primary">Edit</button>
+                    </td>
+                    <td text-align="left">
+                      <button onclick="delete_adventure(this)" class="btn btn-xs btn-primary">Delete</button>
+                    </td>
+                    <td text-align="left">
+                      <button onclick="show_detail(this)" class="btn btn-xs btn-primary">More</button>
+                    </td>
+                    <% count +=1 %>
+                  </tr>
+              <% end %>
               </tbody>
-      </table>
-            </div>
+            </table>
+          </div>
         </div>
       </div>
-      <div class = "text-center">
-        <%= will_paginate @adventures, renderer: BootstrapPagination::Rails%>
+      <div class="text-center">
+        <%= will_paginate @adventures, renderer: BootstrapPagination::Rails %>
       </div>
   <% else %>
       <div align="center">
-          <p>No Data found</p>
+        <p>No Data found</p>
       </div>
-  <%end%>
+  <% end %>
 
-<div align="center">
-  <button onclick="location.href = '/adventures/new'" class="btn btn-primary">Create New Adventure</button>
-</div>
+  <div align="center">
+    <button onclick="location.href = '/adventures/new'" class="btn btn-primary">Create New Adventure</button>
+  </div>
 
 </div>
 
 <script>
-  function delete_adventure(delete_button) {
-      var form = $(delete_button).parent().parent().find("form");
-      form.attr('action', "/adventures/delete");
-      form.submit();
-  }
+    function delete_adventure(delete_button) {
+        var form = $(delete_button).parent().parent().find("form");
+        form.attr('action', "/adventures/delete");
+        form.submit();
+    }
 
-  function edit_adventure(edit_button) {
-      var form = $(edit_button).parent().parent().find("form");
-      form.attr('action', "/adventures/edit_page");
-      form.submit();
-  }
+    function edit_adventure(edit_button) {
+        var form = $(edit_button).parent().parent().find("form");
+        form.attr('action', "/adventures/edit_page");
+        form.submit();
+    }
 
-  function show_detail(show_button) {
-      var form = $(show_button).parent().parent().find("form");
-      form.attr('action', "/adventures/show_detail");
-      form.attr('method', "get");
-      form.submit();
-  }
+    function show_detail(show_button) {
+        var form = $(show_button).parent().parent().find("form");
+        form.attr('action', "/adventures/show_detail");
+        form.attr('method', "get");
+        form.submit();
+    }
 </script>
 

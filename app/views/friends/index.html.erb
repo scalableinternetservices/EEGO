@@ -3,13 +3,13 @@
     <div class="col-lg-9">
 
       <div class="input-group">
-      <form id="search_friends" action="/friends" method="get">
-        <input name="search" type="text" class="form-control" placeholder="Find new friends...">
-      </form>
+        <form id="search_friends" action="/friends" method="get">
+          <input name="search" type="text" class="form-control" placeholder="Find new friends...">
+        </form>
       <span class="input-group-btn">
         <button onclick="searchFriend()" class="btn btn-default" type="button">Go!</button>
       </span>
-<!--
+        <!--
       <%= form_tag '/friends', id: "search_friends", method: "get" do |f| %>
         <%= label_tag :search %>
         <%= text_field_tag :search, params[:search] %>
@@ -31,38 +31,38 @@
 <div class="container" id="friend_list">
   <div class="row">
     <div class="col-lg-12">
-    <%if @search_result == 0%>
-      <h3>My Friends</h2>
-    <% else %>
-      <h3>Search Results</h2>
-    <% end %>
+      <% if @search_result == 0 %>
+          <h3>My Friends</h2>
+      <% else %>
+          <h3>Search Results</h2>
+      <% end %>
     </div>
     <% if @no_user == 0 %>
         <% @users.each do |user| %>
             <% if user.id != current_user.id %>
-            <div class="col-lg-4 col-sm-6 text-center">
-              <img class="img-circle img-responsive img-center" src="https://github.com/scalableinternetservices/EEGO/blob/master/other/teammate/photo/Mingrui_Shi_cat.JPG?raw=true" alt="">
-              <h4><%= user.email %>
-              </h4>
-              <% if !is_friend?(user) %>
-                  <% if is_pending_request?(user) %>
-                  <small class="input-group-btn">
-                    <button class="btn btn-sm btn-default" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
-                  </small>
-                  <% else %>
-                    <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
-                    <%= text_field_tag :friend, user.id, type: :hidden %>
-                    <% end %>
-                    <span class="input-group-btn">
+                <div class="col-lg-4 col-sm-6 text-center">
+                  <img class="img-circle img-responsive img-center" src="https://github.com/scalableinternetservices/EEGO/blob/master/other/teammate/photo/Mingrui_Shi_cat.JPG?raw=true" alt="">
+                  <h4><%= user.email %>
+                  </h4>
+                  <% if !is_friend?(user) %>
+                      <% if is_pending_request?(user) %>
+                          <small class="input-group-btn">
+                            <button class="btn btn-sm btn-default" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
+                          </small>
+                      <% else %>
+                          <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
+                              <%= text_field_tag :friend, user.id, type: :hidden %>
+                          <% end %>
+                          <span class="input-group-btn">
                       <button onclick="sendRequest(<%= user.id %>)" class="btn btn-sm btn-primary" type="button">&nbsp;Request&nbsp;</button>
                     </span>
+                      <% end %>
                   <% end %>
-              <%end%>
-            <hr>
-            </div>
+                  <hr>
+                </div>
             <% end %>
         <% end %>
-    <% elsif @no_user == 1%>
+    <% elsif @no_user == 1 %>
         <div class="col-lg-12">
           <p>No results found.</p>
         </div>
@@ -72,8 +72,8 @@
         </div>
     <% end %>
   </div>
-  <div class = "text-center">
-    <%= will_paginate @users, renderer: BootstrapPagination::Rails%>
+  <div class="text-center">
+    <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
   </div>
 </div>
 
@@ -85,59 +85,73 @@
 
 
 <!--<div class="container" id="listing">-->
-  <!--<table class="table table-striped">-->
-    <!--<tbody>-->
-    <!--<% if @no_user == 0 %>-->
-      <!--<% @users.each do |user| %>-->
-      <!--<tr>-->
-        <!--<% if user.id != current_user.id %>-->
-          <!--<div class="row">-->
+<!--<table class="table table-striped">-->
+<!--<tbody>-->
+<!--
+<% if @no_user == 0 %>-->
+    <!--
+    <% @users.each do |user| %>-->
+        <!--<tr>-->
+        <!--
+        <% if user.id != current_user.id %>-->
+            <!--<div class="row">-->
             <!--<td><%= user.email %></td>-->
             <!--<td>-->
-              <!--<% if !is_friend?(user) %>-->
-                <!--<% if is_pending_request?(user) %>-->
-                  <!--<span class="input-group-btn">-->
+            <!--
+            <% if !is_friend?(user) %>-->
+                <!--
+                <% if is_pending_request?(user) %>-->
+                    <!--<span class="input-group-btn">-->
                     <!--<button class="btn btn-xs btn-default pull-right" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>-->
-                  <!--</span>-->
-                <!--<% else %>-->
-	          <!--<%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>-->
-	            <!--<%= text_field_tag :friend, user.id, type: :hidden %>-->
-                  <!--<% end %>-->
-                  <!--<span class="input-group-btn">-->
+                    <!--</span>-->
+                    <!--
+                <% else %>-->
+                    <!--<%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>-->
+                        <!--<%= text_field_tag :friend, user.id, type: :hidden %>-->
+                        <!--
+                    <% end %>-->
+                    <!--<span class="input-group-btn">-->
                     <!--<button onclick="sendRequest(<%= user.id %>)" class="btn btn-xs btn-primary pull-right" type="button">&nbsp;Request&nbsp;</button>-->
-                  <!--</span>-->
-	        <!--<% end %>-->
-              <!--<% end %>-->
+                    <!--</span>-->
+                    <!--
+                <% end %>-->
+                <!--
+            <% end %>-->
             <!--</td>-->
-          <!--</div>-->
-        <!--<% end %>-->
-      <!--</tr>-->
-      <!--<% end %>-->
-      <!--<% elsif @no_user == 1%>-->
-      <!--<div class="note">-->
-        <!--<p>No results found.</p>-->
-      <!--</div>-->
-    <!--<% else %>-->
-      <!--<div class="note">-->
-        <!--<p>You have no friends at the moment. Find your friends now!</p>-->
-      <!--</div>-->
-    <!--<% end %>-->
-    <!--</tbody>-->
-  <!--</table>-->
-  <!--<div class = "text-center">-->
-    <!--<%= will_paginate @users, renderer: BootstrapPagination::Rails%>-->
-  <!--</div>-->
+            <!--</div>-->
+            <!--
+        <% end %>-->
+        <!--</tr>-->
+        <!--
+    <% end %>-->
+    <!--
+<% elsif @no_user == 1 %>-->
+    <!--<div class="note">-->
+    <!--<p>No results found.</p>-->
+    <!--</div>-->
+    <!--
+<% else %>-->
+    <!--<div class="note">-->
+    <!--<p>You have no friends at the moment. Find your friends now!</p>-->
+    <!--</div>-->
+    <!--
+<% end %>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--<div class = "text-center">-->
+<!--<%= will_paginate @users, renderer: BootstrapPagination::Rails %>-->
+<!--</div>-->
 <!--</div>-->
 
 
 <script>
-  function searchFriend() {
-    var form = $("#search_friends");
-    form.submit();
-  }
+    function searchFriend() {
+        var form = $("#search_friends");
+        form.submit();
+    }
 
-  function sendRequest(id) {
-    var form = $("#request_form_" + id);
-    form.submit();
-  }
+    function sendRequest(id) {
+        var form = $("#request_form_" + id);
+        form.submit();
+    }
 </script>

@@ -1,98 +1,102 @@
 <div class="planform">
   <table align="center">
-    <%= form_tag("/adventures/create", method: "post", id: "new_adventure_form") do%>
+    <%= form_tag("/adventures/create", method: "post", id: "new_adventure_form") do %>
+        <tr>
+          <td class="description"><h4>Location</h4></td>
+          <td>
+            <%= text_field_tag :location, nil, placeholder: "1~20 characters", maxlength: 20, class: "form-control" %>
+          </td>
+        </tr>
+        <tr>
+          <td class="description"><h4>Number of People</h4></td>
+          <td>
+            <%= text_field_tag :num_people, nil, placeholder: "1~99", maxlength: 2, class: "form-control" %>
+          </td>
+        </tr>
+        <tr>
+          <td class="description"><h4>Number of Days</h4></td>
+          <td>
+            <%= text_field_tag :num_day, nil, placeholder: "1~99", maxlength: 2, class: "form-control" %>
+          </td>
+        </tr>
+        <tr>
+          <td class="description"><h4>Plan</h4></td>
+          <td>
+            <%= text_area_tag :plan, nil, placeholder: "Please enter your plan (400characters)", size: "40x10", class: "form-control" %>
+          </td>
+        </tr>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+    <% end %>
+    </form>
     <tr>
-      <td class="description"><h4>Location</h4></td>
       <td>
-        <%=text_field_tag :location,nil, placeholder: "1~20 characters", maxlength: 20, class: "form-control" %>
-            </td>
-            </tr>
-            <tr>
-              <td class="description"><h4>Number of People</h4></td>
-              <td>
-                <%=text_field_tag :num_people,nil, placeholder: "1~99", maxlength: 2, class: "form-control" %>
-                    </td>
-                    </tr>
-                    <tr>
-                      <td class="description"><h4>Number of Days</h4></td>
-                      <td>
-                        <%=text_field_tag :num_day,nil, placeholder: "1~99", maxlength: 2, class: "form-control" %>
-                            </td>
-                            </tr>
-                            <tr>
-                              <td class="description"><h4>Plan</h4></td>
-                              <td>
-                                <%=text_area_tag :plan,nil, placeholder: "Please enter your plan (400characters)", size: "40x10", class: "form-control" %>
-                                    </td>
-                                    </tr>
-                                    <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-                                <% end %>
-                                </form>
-                                <tr>
-                                  <td><button onclick="location.href='/adventures/index'" class="btn btn-primary">Cancel</button></td>
-                                  <td><button onclick="check_form()" class="btn btn-primary">Submit</button></td>
-                                </tr>
-                                </table>
-                                </div>
+        <button onclick="location.href='/adventures/index'" class="btn btn-primary">Cancel</button>
+      </td>
+      <td>
+        <button onclick="check_form()" class="btn btn-primary">Submit</button>
+      </td>
+    </tr>
+  </table>
+</div>
 
-                                <script>
-                                    function check_form() {
-                                        var form = $("#new_adventure_form");
-                                        if (check_valid_input()) {
-                                            form.submit();
-                                        }
-                                    }
+<script>
+    function check_form() {
+        var form = $("#new_adventure_form");
+        if (check_valid_input()) {
+            form.submit();
+        }
+    }
 
-                                    function check_valid_input() {
-                                        var isValid = true;
-                                        var location = $("#location");
-                                        var num_people = $("#num_people");
-                                        var num_day = $("#num_day");
-                                        var plan = $("#plan");
+    function check_valid_input() {
+        var isValid = true;
+        var location = $("#location");
+        var num_people = $("#num_people");
+        var num_day = $("#num_day");
+        var plan = $("#plan");
 
-                                        //check location
-                                        if (location === undefined || location.val().length === 0) {
-                                            warning(location);
-                                            isValid = false;
-                                        }
-                                        else {
-                                            remove_warning(location);
-                                        }
+        //check location
+        if (location === undefined || location.val().length === 0) {
+            warning(location);
+            isValid = false;
+        }
+        else {
+            remove_warning(location);
+        }
 
-                                        //check plan
-                                        if (plan === undefined || plan.val().length === 0) {
-                                            warning(plan);
-                                            isValid = false;
-                                        }
-                                        else {
-                                            remove_warning(plan);
-                                        }
+        //check plan
+        if (plan === undefined || plan.val().length === 0) {
+            warning(plan);
+            isValid = false;
+        }
+        else {
+            remove_warning(plan);
+        }
 
-                                        //check num_people
-                                        if (num_people === undefined || num_people.val()<1 || num_people.val()>99) {
-                                            warning(num_people);
-                                            isValid = false;
-                                        }
-                                        else {
-                                            remove_warning(num_people);
-                                        }
+        //check num_people
+        if (num_people === undefined || num_people.val() < 1 || num_people.val() > 99) {
+            warning(num_people);
+            isValid = false;
+        }
+        else {
+            remove_warning(num_people);
+        }
 
-                                        //check num_day
-                                        if (num_day === undefined || num_day.val()<1 || num_day.val()>99) {
-                                            warning(num_day);
-                                            isValid = false;
-                                        }
-                                        else {
-                                            remove_warning(num_day);
-                                        }
-                                        return isValid;
-                                    }
+        //check num_day
+        if (num_day === undefined || num_day.val() < 1 || num_day.val() > 99) {
+            warning(num_day);
+            isValid = false;
+        }
+        else {
+            remove_warning(num_day);
+        }
+        return isValid;
+    }
 
-                                    function warning(input) {
-                                        input.addClass('error');
-                                    }
+    function warning(input) {
+        input.addClass('error');
+    }
 
-                                    function remove_warning(input) {
-                                        input.removeClass('error');
-                                    }
-                                </script>
+    function remove_warning(input) {
+        input.removeClass('error');
+    }
+</script>
