@@ -44,18 +44,20 @@
               <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
               <h4><%= user.email %>
               </h4>
-              <% if is_pending_request?(user) %>
+              <% if !is_friend?(user) %>
+                  <% if is_pending_request?(user) %>
                   <small class="input-group-btn">
                     <button class="btn btn-sm btn-default" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
                   </small>
-              <% else %>
+                  <% else %>
                   <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
                   <%= text_field_tag :friend, user.id, type: :hidden %>
-              <% end %>
+                  <% end %>
               <span class="input-group-btn">
                     <button onclick="sendRequest(<%= user.id %>)" class="btn btn-sm btn-primary" type="button">&nbsp;Request&nbsp;</button>
               </span>
-            <% end %>
+                  <% end %>
+              <%end%>
             <hr>
             </div>
             <% end %>
