@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
     @friendships = current_user.friendships
     @friends = []
     @friendships.each do |f|
-      @friends.push User.find(f.friend_id) #if f.status == 1
+      @friends.push User.find(f.friend_id) if f.status == 1
     end
   end
 
