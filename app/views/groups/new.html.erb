@@ -1,8 +1,12 @@
 <div class="container">
   <%= form_tag '/groups', method: :post, id: "create_group" do %>
     <% if @friends.count > 0 %>
-      <%= label_tag(:group_name, "Create a group name:") %>
-      <%= text_field_tag :group_name, nil, :required => true ,:size => 50%>
+      <div class="row">
+        <div class="col-lg-8" id="group_name_input">
+          <%= label_tag(:group_name, "Create a group name:") %>
+          <%= text_field_tag :group_name, nil, :required => true %>
+        </div>
+      </div>
       <ul class="list-group">
       <% @friends.each do |friend| %>
         <li class="list-group-item">
