@@ -5,18 +5,18 @@
   <tr><td><%= User.find(n.sender_user_id).email + " wants to invite you as a friend!"%></td>
   <% if n.status == 0 %>
   <td>
-   <%= form_tag("/friends", method: "patch", id: "accept_invitation") do%>
+   <%= form_tag("/friends", method: "patch", id: "accept_invitation_#{n.id}") do%>
     <%=hidden_field_tag(:sender_user_id, n.sender_user_id) %>
     <%=text_field_tag :receiver_user_id, current_user.id ,type: :hidden %>
     <%= text_field_tag :n_id, n.id, type: :hidden %>
    <%end%>
-    <button class = "btn btn-xs btn-primary" onclick = "accept_invitation()">Accept</button>
+    <button class = "btn btn-xs btn-primary" onclick = "accept_invitation(<%= n.id %>)">Accept</button>
     </td>
     <td>
-      <%= form_tag(delete_friendship_path(n.sender_user_id), method: "delete", id: "decline_invitation") do %>
+      <%= form_tag(delete_friendship_path(n.sender_user_id), method: "delete", id: "decline_invitation_#{n.id}") do %>
       <%= text_field_tag :n_id, n.id, type: :hidden %>
     <% end %>
-    <button class = "btn btn-xs btn-primary" onclick = "decline_invitation()">Decline</button>
+    <button class = "btn btn-xs btn-primary" onclick = "decline_invitation(<%= n.id %>)">Decline</button>
     </td>
     <% else %>
     <td></td>
@@ -31,12 +31,12 @@
 </table>
 </div>
 <script>
-    function accept_invitation() {
-        var form1 = $("#accept_invitation");
+    function accept_invitation(id) {
+        var form1 = $("#accept_invitation_" + id);
         form1.submit();
     }
-    function decline_invitation() {
-        var form2 = $("#decline_invitation");
+    function decline_invitation(id) {
+        var form2 = $("#decline_invitation_" + id);
         form2.submit();
     }
 </script>

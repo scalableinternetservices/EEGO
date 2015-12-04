@@ -3,12 +3,17 @@ class FriendsController < ApplicationController
 
   def index
     if params[:search] != nil
-      @users = User.search(params[:search]).paginate(:page => params[:page], :per_page => 9)
+      @raw_users = User.search(params[:search])
+      @users = []
+      @raw_users.each do |user|
+        @users.push user if user.id != current_user.id and Friendship.where("user_id=#{current_user.id} AND friend_id=#{user.id} AND status= 1").empty?
+      end
       @no_user = 0
       @search_result = 1
       if @users.empty?
         @no_user = 1
       end
+      @users = @users.paginate(:page => params[:page], :per_page => 9)
     else
       @search_result = 0
       @friends = current_user.friendships
@@ -21,6 +26,7 @@ class FriendsController < ApplicationController
       else
         @no_user = 2
       end
+      @users.sort! {|a, b| a.email <=> b.email}
       @users = @users.paginate(:page => params[:page], :per_page => 9)
     end
   end

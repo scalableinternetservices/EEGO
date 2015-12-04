@@ -39,29 +39,24 @@
     </div>
     <% if @no_user == 0 %>
         <% @users.each do |user| %>
-            <% if user.id != current_user.id %>
             <div class="col-lg-4 col-sm-6 text-center">
               <img class="img-circle img-center" src="https://github.com/scalableinternetservices/EEGO/blob/master/other/teammate/photo/Mingrui_Shi_cat.JPG?raw=true" alt="" height="200" width="200">
               <h4><%= user.email %>
               </h4>
-              <% if !is_friend?(user) %>
                   <% if is_pending_request?(user) %>
                   <small class="input-group-btn">
                     <button class="btn btn-sm btn-default" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
                   </small>
-                  <% else %>
+                  <% elsif @search_result == 1 %>
                     <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
                     <%= text_field_tag :friend, user.id, type: :hidden %>
                     <% end %>
                     <span class="input-group-btn">
-
                       <button onclick="sendRequest(<%= user.id %>)" class="btn btn-sm btn-primary" type="button">&nbsp;Request&nbsp;</button>
                     </span>
-                      <% end %>
                   <% end %>
-                  <hr>
-                </div>
-            <% end %>
+              <hr>
+            </div>
         <% end %>
     <% elsif @no_user == 1 %>
         <div class="col-lg-12">
