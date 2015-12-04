@@ -56,6 +56,6 @@ group :development do
   gem 'will_paginate'
 
   #Pagination bootstrap
-  gem 'will_paginate-bootstrap'
+  #gem 'will_paginate-bootstrap'
 end
 
