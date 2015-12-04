@@ -26,7 +26,7 @@
             </tr>
         <%end%>
         <div class = "text-center">
-        <%= will_paginate @groups%>
+        <%= will_paginate @groups, renderer: BootstrapPagination::Rails%>
         </div>
       </table>
 

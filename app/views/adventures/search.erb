@@ -28,7 +28,7 @@
         <%end%>
       </table>
       <div class = "text-center">
-      <%= will_paginate @adventures%>
+      <%= will_paginate @adventures, renderer: BootstrapPagination::Rails%>
       </div>
 <% else %>
       <div align="center">

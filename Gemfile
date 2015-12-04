@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'will_paginate'
 
 #Pagination bootstrap
-#gem 'will_paginate-bootstrap'
+gem 'will_paginate-bootstrap'
 
 
 # bundle exec rake doc:rails generates the API under doc/api.
