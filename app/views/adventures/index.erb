@@ -1,8 +1,13 @@
 <div class="planresult">
   <% if (!@adventures.empty?) %>
       <% count=1%>
-      <table align="center" width="800">
-        <tr>
+      <div class="container container-table">
+        <div class="row vertical-center-row">
+          <div class="col-md-8 col-md-offset-2">
+            <table width="800" class="table table-striped table-hover">
+              <thead align="center">
+
+              <tr>
           <th>Plan</th>
           <th>Location</th>
           <th>People</th>
@@ -11,6 +16,8 @@
           <th>Delete</th>
           <th>Show Detail</th>
         </tr>
+              </thead>
+              <tbody text-align="left">
         <% @adventures.each do |adventure| %>
             <tr>
               <form method="post">
@@ -30,7 +37,11 @@
               <% count +=1%>
             </tr>
         <%end%>
+              </tbody>
       </table>
+            </div>
+        </div>
+      </div>
       <div class = "text-center">
         <%= will_paginate @adventures, renderer: BootstrapPagination::Rails%>
       </div>
