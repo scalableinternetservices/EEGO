@@ -41,7 +41,7 @@
         <% @users.each do |user| %>
             <% if user.id != current_user.id %>
             <div class="col-lg-4 col-sm-6 text-center">
-              <img class="img-circle img-responsive img-center" src="https://github.com/scalableinternetservices/EEGO/blob/master/other/teammate/photo/Mingrui_Shi_cat.JPG?raw=true" alt="">
+              <img class="img-circle img-center" src="https://github.com/scalableinternetservices/EEGO/blob/master/other/teammate/photo/Mingrui_Shi_cat.JPG?raw=true" alt="" height="200" width="200">
               <h4><%= user.email %>
               </h4>
               <% if !is_friend?(user) %>
