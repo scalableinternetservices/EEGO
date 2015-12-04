@@ -50,12 +50,12 @@
                     <button class="btn btn-sm btn-default" type="button" disabled>&nbsp;&nbsp;Pending&nbsp;</button>
                   </small>
                   <% else %>
-                  <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
-                  <%= text_field_tag :friend, user.id, type: :hidden %>
-                  <% end %>
-              <span class="input-group-btn">
-                    <button onclick="sendRequest(<%= user.id %>)" class="btn btn-sm btn-primary" type="button">&nbsp;Request&nbsp;</button>
-              </span>
+                    <%= form_tag '/friends', method: :post, id: "request_form_#{user.id}" do %>
+                    <%= text_field_tag :friend, user.id, type: :hidden %>
+                    <% end %>
+                    <span class="input-group-btn">
+                      <button onclick="sendRequest(<%= user.id %>)" class="btn btn-sm btn-primary" type="button">&nbsp;Request&nbsp;</button>
+                    </span>
                   <% end %>
               <%end%>
             <hr>
