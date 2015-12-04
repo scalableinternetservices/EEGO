@@ -1,90 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
-    <%= csrf_meta_tags %>
-    <title>EasyGo!</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <style>
-        .search_user {
-            padding-top: 1cm;
-            text-align: center;
-        }
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <%= csrf_meta_tags %>
+  <title>EasyGo!</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <style>
+      .search_user {
+          padding-top: 1cm;
+          text-align: center;
+      }
 
-        .results {
-            padding-top: 1cm;
-            text-align: center;
-        }
+      .results {
+          padding-top: 1cm;
+          text-align: center;
+      }
 
-        .planform {
-            padding-top: 1cm;
-            align: center;
-        }
+      .planform {
+          padding-top: 1cm;
+          align: center;
+      }
 
-        .planform td {
-            padding:10px 15px 0 15px;
-        }
+      .planform td {
+          padding: 10px 15px 0 15px;
+      }
 
-        .planresult {
-            padding-top: 1cm;
-            text-align: left;
-        }
+      .planresult {
+          padding-top: 1cm;
+          text-align: left;
+      }
 
-        .planresult td {
-            padding:5px 0px 5px 0px;
-        }
+      .planresult td {
+          padding: 5px 0px 5px 0px;
+      }
 
-        .error {
-            border: 2px solid red;
-        }
+      .error {
+          border: 2px solid red;
+      }
 
-        .body-padding {
-            padding-top: 30px;
-        }
+      .body-padding {
+          padding-top: 30px;
+      }
 
-	#friend_input {
-	    padding-top: 0.7cm;
-	}
+      #friend_input {
+          padding-top: 0.7cm;
+      }
 
-        #group_name_input {
-	    padding-top: 0.5cm;
-            padding-bottom: 0.5cm;
-	}
-    </style>
-  </head>
+      #group_name_input {
+          padding-top: 0.5cm;
+          padding-bottom: 0.5cm;
+      }
+  </style>
+</head>
 
-  <body background="http://allwallpapersnew.com/wp-content/gallery/professional-background-images-for-websites/BWHP-background.jpg">
+<body background="http://allwallpapersnew.com/wp-content/gallery/professional-background-images-for-websites/BWHP-background.jpg">
 
-    <div class="nav navbar-default navbar-fixed-top">        
-      <div class="container">
-        <ul class="pull-left">
-          
-          <li><a href="/home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>|
-          <li><a href="/adventures/index"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> My Adventure</a></li>|
-          <li><a href="/friends"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> find friends</a></li>|
-          <li><a href="/notification"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> message</a></li>|
-          <li><a href="/groups"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> My Group</a></li>
-      
-        </ul>
+<div class="nav navbar-default navbar-fixed-top">
+  <div class="container">
+    <ul class="pull-left">
 
-        <ul class="pull-right">
-        <% if user_signed_in? %>
+      <li><a href="/home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+      |
+      <li>
+        <a href="/adventures/index"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> My Adventure</a>
+      </li>
+      |
+      <li><a href="/friends"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> find friends</a></li>
+      |
+      <li><a href="/notification"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> message</a></li>
+      |
+      <li><a href="/groups"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> My Group</a></li>
+
+    </ul>
+
+    <ul class="pull-right">
+      <% if user_signed_in? %>
           Hello <strong><%= current_user.email %></strong>.
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-        <% end %>
-         </ul>
-    </div>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+      <% else %>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+      <% end %>
+    </ul>
   </div>
+</div>
 
 
-  <div class="body-padding">
+<div class="body-padding">
   <%= yield %>
-  </div>
+</div>
 </body>
 </html>
 
